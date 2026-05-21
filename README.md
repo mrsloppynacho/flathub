@@ -1,0 +1,2 @@
+# flathub
+apps
