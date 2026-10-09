@@ -1,0 +1,27 @@
+app-id: com.github.mrsloppynacho.ideal-lamp
+runtime: org.gnome.Platform
+runtime-version: '47'
+sdk: org.gnome.Sdk
+command: ideal-lamp
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --socket=pulseaudio
+  - --filesystem=xdg-data/icons:ro
+  - --filesystem=xdg-data/applications:ro
+modules:
+  - name: ideal-lamp
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 ideal-lamp /app/bin/ideal-lamp
+      - install -Dm644 ideal-lamp.desktop /app/share/applications/com.github.mrsloppynacho.ideal-lamp.desktop
+      - install -Dm644 ideal-lamp.svg /app/share/icons/hicolor/scalable/apps/com.github.mrsloppynacho.ideal-lamp.svg
+    sources:
+      - type: git
+        url: https://github.com/mrsloppynacho/ideal-lamp.git
+        branch: main
+        x-checker-data:
+          type: git
+          tag-pattern: ^v(.*)$
